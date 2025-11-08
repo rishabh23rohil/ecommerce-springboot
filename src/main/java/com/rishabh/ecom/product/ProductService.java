@@ -1,52 +1,45 @@
 package com.rishabh.ecom.product;
 
-import com.rishabh.ecom.product.dto.ProductDtos;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
-@Transactional
 public class ProductService {
-  private final ProductRepository repo;
 
-  public ProductService(ProductRepository repo) {
-    this.repo = repo;
-  }
+    private static final Set<String> ALLOWED_SORT_FIELDS = Set.of(
+            "createdAt", "name", "price", "stockQty", "sku", "id"
+    );
 
-  @CacheEvict(value = "productById", key = "#result.id", condition = "#result != null")
-  public Product create(ProductDtos.Create in) {
-    if (repo.existsBySku(in.sku())) throw new IllegalStateException("SKU already exists");
-    Product p = Product.builder()
-        .name(in.name())
-        .description(in.description())
-        .price(in.price())
-        .sku(in.sku())
-        .stockQty(in.stockQty())
-        .build();
-    return repo.save(p);
-  }
+    private final ProductRepository repo;
 
-  @Transactional(readOnly = true)
-  public List<Product> list() { return repo.findAll(); }
+    public ProductService(ProductRepository repo) {
+        this.repo = repo;
+    }
 
-  @Transactional(readOnly = true)
-  @Cacheable(value = "productById", key = "#id")
-  public Product get(Long id) { return repo.findById(id).orElseThrow(); }
+    public Page<Product> search(String q, int page, int size, String sortBy, String order) {
+        // sanitize paging
+        page = Math.max(page, 0);
+        size = (size <= 0 || size > 200) ? 20 : size;
 
-  @CacheEvict(value = "productById", key = "#id")
-  public Product update(Long id, ProductDtos.Update in) {
-    Product p = repo.findById(id).orElseThrow();
-    if (in.name() != null) p.setName(in.name());
-    if (in.description() != null) p.setDescription(in.description());
-    if (in.price() != null) p.setPrice(in.price());
-    if (in.stockQty() != null) p.setStockQty(in.stockQty());
-    return p;
-  }
+        // sanitize sort field
+        if (sortBy == null || !ALLOWED_SORT_FIELDS.contains(sortBy)) {
+            sortBy = "createdAt";
+        }
 
-  @CacheEvict(value = "productById", key = "#id")
-  public void delete(Long id) { repo.deleteById(id); }
+        // sanitize direction
+        Sort.Direction dir = Sort.Direction.DESC;
+        if (order != null) {
+            dir = Sort.Direction.fromOptionalString(order).orElse(Sort.Direction.DESC);
+        }
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(dir, sortBy));
+
+        // build spec (q filters by sku or name)
+        Specification<Product> spec = ProductSpecifications.matchingQuery(q);
+
+        return repo.findAll(spec, pageable);
+    }
 }

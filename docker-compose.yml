@@ -23,5 +23,18 @@ services:
     restart: unless-stopped
     ports: ["6379:6379"]
 
+  app:
+    build: .
+    container_name: shop-app
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports: ["8080:8080"]
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
 volumes:
   mysql_data:
