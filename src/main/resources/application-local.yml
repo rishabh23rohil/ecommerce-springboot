@@ -7,3 +7,9 @@ spring:
     redis:
       host: localhost
       port: 6379
+
+app:
+  jwt:
+    secret: "CHANGE_ME_TO_A_RANDOM_64+_CHAR_SECRET_IN_PRODUCTION_USE_ENV_VAR_OR_SECRET_MANAGER"
+    expirationSeconds: 3600
+    issuer: "ecom-api"

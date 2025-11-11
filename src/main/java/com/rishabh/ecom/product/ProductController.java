@@ -1,9 +1,11 @@
 package com.rishabh.ecom.product;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+@SecurityRequirement(name = "bearer-jwt")
 @RestController
 @RequestMapping(path = "/api/v1/products", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
