@@ -12,8 +12,7 @@ import org.springframework.context.annotation.Configuration;
     info = @Info(
         title = "Ecommerce API",
         version = "v1"
-    ),
-    security = { @SecurityRequirement(name = "bearer-jwt") }
+    )
 )
 @SecurityScheme(
     name = "bearer-jwt",

@@ -30,3 +30,14 @@ app:
     secret: "CHANGE_ME_TO_A_RANDOM_64+_CHAR_SECRET_IN_PRODUCTION_USE_ENV_VAR_OR_SECRET_MANAGER"
     expirationSeconds: 3600
     issuer: "ecom-api"
+
+logging:
+  level:
+    root: INFO
+    com.rishabh.ecom.product.ProductService: INFO
+    com.rishabh.ecom.auth.JwtAuthFilter: INFO
+    org.springframework.cache: DEBUG
+    org.springframework.data.redis.cache: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

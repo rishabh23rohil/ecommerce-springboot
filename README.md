@@ -81,6 +81,17 @@ This is a RESTful e-commerce backend API that provides:
 - ✅ Protected endpoints
 - ✅ Swagger JWT integration
 
+### Milestone 5: Caching & Performance
+- ✅ Redis-based caching for product reads
+- ✅ ETag / If-None-Match conditional requests (304 Not Modified)
+- ✅ Cache invalidation on writes (POST, PUT, DELETE)
+- ✅ Cache hit/miss logging
+- ✅ Cache statistics endpoint
+- ✅ Optimized Redis cache configuration
+- ✅ Null-safe cache key generation
+- ✅ JWT filter optimization for public endpoints
+- ✅ N+1 query prevention ready
+
 ## 📁 Project Structure
 
 ```
@@ -243,7 +254,10 @@ app:
 ### Swagger UI
 
 Interactive API documentation is available at:
-- **URL**: http://localhost:8080/swagger-ui.html
+- **URL**: http://localhost:8080/swagger-ui/index.html
+- **Alternative**: http://localhost:8080/swagger-ui.html (redirects to index.html)
+
+**Note**: Swagger UI is publicly accessible and does not require authentication. However, to test authenticated endpoints, you must authorize with a JWT token.
 
 ### Using Swagger with JWT
 
@@ -270,10 +284,16 @@ GET  /api/v1/auth/me          # Requires authentication
 
 #### Products
 ```
-GET    /api/v1/products        # Requires authentication
-POST   /api/v1/products        # Requires ADMIN role
-PUT    /api/v1/products/{id}   # Requires ADMIN role
-DELETE /api/v1/products/{id}   # Requires ADMIN role
+GET    /api/v1/products           # Requires authentication (cached)
+GET    /api/v1/products/{id}       # Requires authentication (cached, ETag support)
+POST   /api/v1/products           # Requires ADMIN role (invalidates cache)
+PUT    /api/v1/products/{id}      # Requires ADMIN role (invalidates cache)
+DELETE /api/v1/products/{id}      # Requires ADMIN role (invalidates cache)
+```
+
+#### Cache Management
+```
+GET    /api/v1/cache/stats        # Requires ADMIN role (cache statistics)
 ```
 
 ## 🔐 Authentication & Authorization
@@ -361,6 +381,8 @@ curl -H "Authorization: Bearer <your-token>" \
 | `/api/v1/healthz` | GET | Public |
 | `/actuator/health` | GET | Public |
 | `/swagger-ui/**` | GET | Public |
+| `/swagger-resources/**` | GET | Public |
+| `/webjars/**` | GET | Public |
 | `/v3/api-docs/**` | GET | Public |
 | `/api/v1/auth/signup` | POST | Public |
 | `/api/v1/auth/login` | POST | Public |
@@ -369,6 +391,7 @@ curl -H "Authorization: Bearer <your-token>" \
 | `/api/v1/products` | POST | ADMIN only |
 | `/api/v1/products/{id}` | PUT | ADMIN only |
 | `/api/v1/products/{id}` | DELETE | ADMIN only |
+| `/api/v1/cache/stats` | GET | ADMIN only |
 
 ## 🗄️ Database Schema
 
@@ -624,9 +647,21 @@ The application uses a multi-stage build:
 - Swagger JWT integration
 - User registration and login
 
+### ✅ Milestone 5: Caching & Performance
+- Redis-based caching with `@Cacheable` annotations
+- Product search and get-by-ID caching
+- Automatic cache invalidation on writes
+- ETag support for conditional GET requests (304 Not Modified)
+- Cache statistics endpoint (`/api/v1/cache/stats`)
+- Cache hit/miss logging for monitoring
+- Optimized Redis serialization (Jackson JSON)
+- 10-minute TTL for cached entries
+- Transaction-aware cache manager
+- Null-safe cache key generation
+- JWT filter optimization for public endpoints (Swagger UI, health checks)
+
 ## 🔮 Future Milestones
 
-- **Milestone 5**: Caching & Performance optimization
 - **Milestone 6**: Testing (Unit, Integration, E2E)
 - **Milestone 7**: CI/CD pipeline
 - **Milestone 8**: Monitoring & Observability
@@ -659,6 +694,40 @@ app:
     expirationSeconds: 3600  # Adjust as needed
 ```
 
+### Caching Strategy
+
+#### Cache Configuration
+- **TTL**: 10 minutes for all cached entries
+- **Cache Names**: 
+  - `products` - Product search results (keyed by query params)
+  - `productById` - Individual products (keyed by ID)
+- **Invalidation**: All caches invalidated on any write operation (POST, PUT, DELETE)
+
+#### ETag Support
+Products support conditional GET requests using ETags:
+- First request returns `ETag` header with product's `updatedAt` timestamp
+- Subsequent requests with `If-None-Match` header return `304 Not Modified` if unchanged
+- Reduces bandwidth and improves performance
+
+#### Cache Performance
+- **Target**: 90%+ cache hit rate for read operations
+- **Monitoring**: Cache statistics available via `/api/v1/cache/stats` (admin only)
+- **Logging**: Cache hits/misses logged at DEBUG level
+
+#### Example: Using ETag
+```bash
+# First request - get product and ETag
+curl -i -H "Authorization: Bearer <token>" \
+  http://localhost:8080/api/v1/products/1
+
+# Response includes: ETag: "1731340800000"
+
+# Conditional request - returns 304 if unchanged
+curl -i -H "Authorization: Bearer <token>" \
+  -H "If-None-Match: \"1731340800000\"" \
+  http://localhost:8080/api/v1/products/1
+```
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -684,7 +753,7 @@ app:
 
 ---
 
-**Last Updated**: November 2024  
+**Last Updated**: November 2025  
 **Version**: 0.1.0-SNAPSHOT  
 **Status**: Active Development
 
