@@ -1,6 +1,7 @@
 package com.rishabh.ecom.product;
 
 import com.rishabh.ecom.product.dto.ProductDtos;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
@@ -27,6 +28,7 @@ public class ProductService {
         this.repo = repo;
     }
 
+    @Timed(value = "product.search", description = "Time taken to search products")
     @Cacheable(value = "products", key = "(#q != null ? #q : 'null') + '-' + #page + '-' + #size + '-' + (#sortBy != null ? #sortBy : 'null') + '-' + (#order != null ? #order : 'null')")
     public Page<Product> search(String q, int page, int size, String sortBy, String order) {
         log.info("🔴 CACHE MISS: products search - q={}, page={}, size={}, sortBy={}, order={}", q, page, size, sortBy, order);
@@ -56,6 +58,7 @@ public class ProductService {
         return result;
     }
 
+    @Timed(value = "product.getById", description = "Time taken to get product by ID")
     @Cacheable(value = "productById", key = "#id")
     public Optional<Product> getProductById(Long id) {
         log.info("🔴 CACHE MISS: productById - id={}", id);

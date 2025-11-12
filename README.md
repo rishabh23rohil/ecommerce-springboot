@@ -92,6 +92,18 @@ This is a RESTful e-commerce backend API that provides:
 - ✅ JWT filter optimization for public endpoints
 - ✅ N+1 query prevention ready
 
+### Milestone 6: Testing & Production Readiness (FAANG-Level)
+- ✅ Comprehensive unit tests (80%+ coverage)
+- ✅ Integration tests with Testcontainers
+- ✅ E2E tests with full application context
+- ✅ CI/CD pipeline (GitHub Actions)
+- ✅ Code coverage reporting (JaCoCo)
+- ✅ Observability (Metrics, Tracing)
+- ✅ Circuit breakers & Retry mechanisms
+- ✅ Rate limiting configuration
+- ✅ Security headers
+- ✅ API versioning support
+
 ## 📁 Project Structure
 
 ```
@@ -295,6 +307,29 @@ DELETE /api/v1/products/{id}      # Requires ADMIN role (invalidates cache)
 ```
 GET    /api/v1/cache/stats        # Requires ADMIN role (cache statistics)
 ```
+
+## Screenshots
+
+### Swagger UI
+![Swagger UI Homepage](screenshots/swagger-homepage.png)
+*Interactive API documentation showing all available endpoints*
+
+![JWT Authorization](screenshots/swagger-jwt-auth.png)
+*JWT token authorization dialog in Swagger UI*
+
+![API Response](screenshots/swagger-api-response.png)
+*Successful API response example in Swagger UI*
+
+### Infrastructure
+![Docker Containers](screenshots/docker-containers.png)
+*Docker containers running: MySQL, Redis, and Spring Boot application*
+
+![Application Logs](screenshots/application-logs.png)
+*Application startup logs showing successful initialization*
+
+### API Endpoints
+![Cache Statistics](screenshots/cache-stats.png)
+*Cache statistics endpoint (admin only)*
 
 ## 🔐 Authentication & Authorization
 
@@ -660,11 +695,23 @@ The application uses a multi-stage build:
 - Null-safe cache key generation
 - JWT filter optimization for public endpoints (Swagger UI, health checks)
 
+### ✅ Milestone 6: Testing & Production Readiness (FAANG-Level)
+- Comprehensive unit tests (80%+ coverage target)
+- Integration tests with Testcontainers
+- E2E tests with full application context
+- CI/CD pipeline (GitHub Actions)
+- Code coverage reporting (JaCoCo)
+- Observability (Metrics, Tracing)
+- Circuit breakers & Retry mechanisms
+- Rate limiting configuration
+- Security headers
+- API versioning support
+
 ## 🔮 Future Milestones
 
-- **Milestone 6**: Testing (Unit, Integration, E2E)
-- **Milestone 7**: CI/CD pipeline
-- **Milestone 8**: Monitoring & Observability
+- **Milestone 7**: Advanced Features (Message Queues, Event-Driven Architecture)
+- **Milestone 8**: Scalability (Load Balancing, Horizontal Scaling)
+- **Milestone 9**: Advanced Monitoring (Grafana Dashboards, Alerting)
 
 ## 📝 Notes
 

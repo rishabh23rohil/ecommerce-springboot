@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  
+  flyway:
+    enabled: false
+  
+  cache:
+    type: simple
+  
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    root: WARN
+    com.rishabh.ecom: DEBUG
+    org.springframework.security: DEBUG
+
