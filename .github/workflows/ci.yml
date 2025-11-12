@@ -100,7 +100,7 @@ jobs:
   code-quality:
     name: Code Quality
     runs-on: ubuntu-latest
-    if: ${{ secrets.SONAR_TOKEN != '' && secrets.SONAR_ORGANIZATION != '' }}
+    if: secrets.SONAR_TOKEN != '' && secrets.SONAR_ORGANIZATION != ''
     steps:
       - uses: actions/checkout@v4
       
