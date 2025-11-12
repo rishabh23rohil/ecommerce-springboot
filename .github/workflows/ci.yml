@@ -100,6 +100,7 @@ jobs:
   code-quality:
     name: Code Quality
     runs-on: ubuntu-latest
+    if: ${{ secrets.SONAR_TOKEN != '' && secrets.SONAR_ORGANIZATION != '' }}
     steps:
       - uses: actions/checkout@v4
       
@@ -110,8 +111,15 @@ jobs:
           distribution: 'temurin'
           cache: maven
       
+      - name: Build project
+        run: mvn clean compile -DskipTests
+      
       - name: Run SonarQube Analysis
-        uses: sonarsource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        with:
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ secrets.SONAR_ORGANIZATION }}_ecommerce-springboot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
