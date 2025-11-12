@@ -100,7 +100,6 @@ jobs:
   code-quality:
     name: Code Quality
     runs-on: ubuntu-latest
-    if: secrets.SONAR_TOKEN != '' && secrets.SONAR_ORGANIZATION != ''
     steps:
       - uses: actions/checkout@v4
       
@@ -114,7 +113,18 @@ jobs:
       - name: Build project
         run: mvn clean compile -DskipTests
       
+      - name: Check SonarCloud configuration
+        id: check-sonar
+        run: |
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ] || [ -z "${{ secrets.SONAR_ORGANIZATION }}" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "SonarCloud secrets not configured, skipping analysis"
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Run SonarQube Analysis
+        if: steps.check-sonar.outputs.skip != 'true'
         uses: SonarSource/sonarqube-scan-action@v5.0.0
         with:
           args: >
