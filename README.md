@@ -1,8 +1,8 @@
-# 🛒 E-Commerce Spring Boot Backend
+# E-Commerce Spring Boot Backend
 
-A production-ready e-commerce REST API built with Spring Boot 3.3, featuring JWT authentication, role-based access control (RBAC), product management, and Redis caching.
+REST API built with Spring Boot 3.3, featuring JWT authentication, role-based access control, product management, and Redis caching.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Tech Stack](#tech-stack)
@@ -19,92 +19,92 @@ A production-ready e-commerce REST API built with Spring Boot 3.3, featuring JWT
 - [Docker Deployment](#docker-deployment)
 - [Milestones Completed](#milestones-completed)
 
-## 🎯 Overview
+## Overview
 
-This is a RESTful e-commerce backend API that provides:
-- **Product Management**: CRUD operations with search, filtering, and pagination
-- **JWT Authentication**: Stateless token-based authentication
-- **Role-Based Access Control**: Admin and User roles with fine-grained permissions
-- **Redis Caching**: High-performance caching layer
-- **Database Migrations**: Version-controlled schema with Flyway
-- **API Documentation**: Interactive Swagger UI
+RESTful e-commerce backend API that provides:
+- Product Management: CRUD operations with search, filtering, and pagination
+- JWT Authentication: Stateless token-based authentication
+- Role-Based Access Control: Admin and User roles with permissions
+- Redis Caching: Caching layer for product data
+- Database Migrations: Version-controlled schema with Flyway
+- API Documentation: Swagger UI
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Core Framework
-- **Java 17**
-- **Spring Boot 3.3.4**
-- **Spring Security** - Authentication & Authorization
-- **Spring Data JPA** - Database access
-- **Spring Data Redis** - Caching
+- Java 17
+- Spring Boot 3.3.4
+- Spring Security - Authentication & Authorization
+- Spring Data JPA - Database access
+- Spring Data Redis - Caching
 
 ### Database & Caching
-- **MySQL 8.0** - Primary database
-- **Redis 7** - Caching layer
-- **Flyway** - Database migrations
+- MySQL 8.0 - Primary database
+- Redis 7 - Caching layer
+- Flyway - Database migrations
 
 ### Security
-- **JWT (jjwt 0.11.5)** - Token-based authentication
-- **BCrypt** - Password hashing
+- JWT (jjwt 0.11.5) - Token-based authentication
+- BCrypt - Password hashing
 
 ### Documentation & Tools
-- **SpringDoc OpenAPI 3** - API documentation (Swagger UI)
-- **Maven** - Build tool
-- **Docker & Docker Compose** - Containerization
+- SpringDoc OpenAPI 3 - API documentation (Swagger UI)
+- Maven - Build tool
+- Docker & Docker Compose - Containerization
 
-## ✨ Features
+## Features
 
 ### Milestone 0-1: Foundation
-- ✅ RESTful API structure
-- ✅ Health check endpoints
-- ✅ Global exception handling
-- ✅ Swagger UI integration
+- RESTful API structure
+- Health check endpoints
+- Global exception handling
+- Swagger UI integration
 
 ### Milestone 2: Product Management
-- ✅ Product CRUD operations
-- ✅ Advanced search and filtering
-- ✅ Pagination and sorting
-- ✅ Redis caching integration
-- ✅ Database migrations with Flyway
+- Product CRUD operations
+- Search and filtering
+- Pagination and sorting
+- Redis caching integration
+- Database migrations with Flyway
 
 ### Milestone 3: Docker & Profiles
-- ✅ Docker containerization
-- ✅ Docker Compose setup
-- ✅ Environment profiles (local, docker)
-- ✅ Health checks and service dependencies
+- Docker containerization
+- Docker Compose setup
+- Environment profiles (local, docker)
+- Health checks and service dependencies
 
 ### Milestone 4: Authentication & Authorization
-- ✅ JWT-based authentication
-- ✅ User registration and login
-- ✅ Role-based access control (RBAC)
-- ✅ Password encryption (BCrypt)
-- ✅ Protected endpoints
-- ✅ Swagger JWT integration
+- JWT-based authentication
+- User registration and login
+- Role-based access control (RBAC)
+- Password hashing (BCrypt)
+- Protected endpoints
+- Swagger JWT integration
 
 ### Milestone 5: Caching & Performance
-- ✅ Redis-based caching for product reads
-- ✅ ETag / If-None-Match conditional requests (304 Not Modified)
-- ✅ Cache invalidation on writes (POST, PUT, DELETE)
-- ✅ Cache hit/miss logging
-- ✅ Cache statistics endpoint
-- ✅ Optimized Redis cache configuration
-- ✅ Null-safe cache key generation
-- ✅ JWT filter optimization for public endpoints
-- ✅ N+1 query prevention ready
+- Redis-based caching for product reads
+- ETag / If-None-Match conditional requests (304 Not Modified)
+- Cache invalidation on writes (POST, PUT, DELETE)
+- Cache hit/miss logging
+- Cache statistics endpoint
+- Redis cache configuration
+- Null-safe cache key generation
+- JWT filter optimization for public endpoints
+- N+1 query prevention ready
 
-### Milestone 6: Testing & Production Readiness (FAANG-Level)
-- ✅ Comprehensive unit tests (80%+ coverage)
-- ✅ Integration tests with Testcontainers
-- ✅ E2E tests with full application context
-- ✅ CI/CD pipeline (GitHub Actions)
-- ✅ Code coverage reporting (JaCoCo)
-- ✅ Observability (Metrics, Tracing)
-- ✅ Circuit breakers & Retry mechanisms
-- ✅ Rate limiting configuration
-- ✅ Security headers
-- ✅ API versioning support
+### Milestone 6: Testing & Production Readiness
+- Unit tests (80%+ coverage)
+- Integration tests with Testcontainers
+- E2E tests with full application context
+- CI/CD pipeline (GitHub Actions)
+- Code coverage reporting (JaCoCo)
+- Observability (Metrics, Tracing)
+- Circuit breakers & Retry mechanisms
+- Rate limiting configuration
+- Security headers
+- API versioning support
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ecommerce-springboot/
@@ -156,65 +156,65 @@ ecommerce-springboot/
 └── README.md                                        # This file
 ```
 
-## 📦 Prerequisites
+## Prerequisites
 
-- **Java 17+** (JDK)
-- **Maven 3.6+**
-- **Docker & Docker Compose** (for containerized setup)
-- **MySQL 8.0** (if running locally without Docker)
-- **Redis 7** (if running locally without Docker)
+- Java 17+ (JDK)
+- Maven 3.6+
+- Docker & Docker Compose (for containerized setup)
+- MySQL 8.0 (if running locally without Docker)
+- Redis 7 (if running locally without Docker)
 
-## 🚀 Quick Start
+## Quick Start
 
-### Option 1: Docker Compose (Recommended)
+### Option 1: Docker Compose
 
-1. **Clone the repository** (if applicable)
+1. Clone the repository (if applicable)
    ```bash
    git clone <repository-url>
    cd ecommerce-springboot
    ```
 
-2. **Start all services**
+2. Start all services
    ```bash
    docker compose up -d
    ```
 
-3. **Verify services are running**
+3. Verify services are running
    ```bash
    docker ps
    ```
 
-4. **Check application logs**
+4. Check application logs
    ```bash
    docker logs -f shop-app
    ```
 
-5. **Access the application**
+5. Access the application
    - API: http://localhost:8080
    - Swagger UI: http://localhost:8080/swagger-ui.html
    - Health Check: http://localhost:8080/api/v1/healthz
 
 ### Option 2: Local Development
 
-1. **Start MySQL and Redis** (or use Docker for these only)
+1. Start MySQL and Redis (or use Docker for these only)
    ```bash
    # Using Docker for databases only
    docker compose up -d mysql redis
    ```
 
-2. **Build the project**
+2. Build the project
    ```bash
    mvn clean package
    ```
 
-3. **Run the application**
+3. Run the application
    ```bash
    mvn spring-boot:run -Dspring-boot.run.profiles=local
    ```
 
    Or run with your IDE using profile: `local`
 
-## ⚙️ Configuration
+## Configuration
 
 ### Application Profiles
 
@@ -261,22 +261,22 @@ app:
     secret: ${APP_JWT_SECRET:default-secret}
 ```
 
-## 📚 API Documentation
+## API Documentation
 
 ### Swagger UI
 
-Interactive API documentation is available at:
-- **URL**: http://localhost:8080/swagger-ui/index.html
-- **Alternative**: http://localhost:8080/swagger-ui.html (redirects to index.html)
+API documentation is available at:
+- URL: http://localhost:8080/swagger-ui/index.html
+- Alternative: http://localhost:8080/swagger-ui.html (redirects to index.html)
 
-**Note**: Swagger UI is publicly accessible and does not require authentication. However, to test authenticated endpoints, you must authorize with a JWT token.
+Note: Swagger UI is publicly accessible and does not require authentication. However, to test authenticated endpoints, you must authorize with a JWT token.
 
 ### Using Swagger with JWT
 
 1. Open Swagger UI
-2. Click the **"Authorize"** button (lock icon)
+2. Click the "Authorize" button (lock icon)
 3. In the `bearer-jwt` field, paste your JWT token (without "Bearer " prefix)
-4. Click **"Authorize"**, then **"Close"**
+4. Click "Authorize", then "Close"
 5. All authenticated endpoints will now include the Authorization header
 
 ### API Endpoints
@@ -312,13 +312,13 @@ GET    /api/v1/cache/stats        # Requires ADMIN role (cache statistics)
 
 ### Swagger UI
 ![Swagger UI Homepage](screenshots/swagger-homepage.png)
-*Interactive API documentation showing all available endpoints*
+*API documentation showing all available endpoints*
 
 ![JWT Authorization](screenshots/swagger-jwt-auth.png)
 *JWT token authorization dialog in Swagger UI*
 
 ![API Response](screenshots/swagger-api-response.png)
-*Successful API response example in Swagger UI*
+*API response example in Swagger UI*
 
 ### Infrastructure
 ![Docker Containers](screenshots/docker-containers.png)
@@ -331,7 +331,7 @@ GET    /api/v1/cache/stats        # Requires ADMIN role (cache statistics)
 ![Cache Statistics](screenshots/cache-stats.png)
 *Cache statistics endpoint (admin only)*
 
-## 🔐 Authentication & Authorization
+## Authentication & Authorization
 
 ### User Registration
 
@@ -428,7 +428,7 @@ curl -H "Authorization: Bearer <your-token>" \
 | `/api/v1/products/{id}` | DELETE | ADMIN only |
 | `/api/v1/cache/stats` | GET | ADMIN only |
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### Products Table
 ```sql
@@ -479,18 +479,18 @@ CREATE TABLE user_roles (
 - `ROLE_USER` - Standard user role
 - `ROLE_ADMIN` - Administrator role
 
-## 💻 Development
+## Development
 
 ### Creating an Admin User
 
-1. **Sign up a new user**
+1. Sign up a new user
    ```bash
    curl -X POST http://localhost:8080/api/v1/auth/signup \
      -H "Content-Type: application/json" \
      -d '{"email":"admin@shop.test","password":"Admin123!"}'
    ```
 
-2. **Promote to admin** (via MySQL)
+2. Promote to admin (via MySQL)
    ```bash
    docker exec -i shop-mysql mysql -uroot -proot shop -e "
    INSERT INTO user_roles (user_id, role_id)
@@ -499,7 +499,7 @@ CREATE TABLE user_roles (
    ON DUPLICATE KEY UPDATE user_id=user_id;"
    ```
 
-3. **Login to get token**
+3. Login to get token
    ```bash
    curl -X POST http://localhost:8080/api/v1/auth/login \
      -H "Content-Type: application/json" \
@@ -535,7 +535,7 @@ Current migrations:
 - `V1__init.sql` - Products table
 - `V2__users_roles_jwt.sql` - Users, roles, and user_roles tables
 
-## 🧪 Testing
+## Testing
 
 ### Manual API Testing
 
@@ -593,18 +593,18 @@ curl.exe "http://localhost:8080/api/v1/products?page=0&size=5" `
 
 ### Verify Security
 
-1. **Test unauthenticated access** (should return 403)
+1. Test unauthenticated access (should return 403)
    ```bash
    curl http://localhost:8080/api/v1/products
    ```
 
-2. **Test with invalid token** (should return 401)
+2. Test with invalid token (should return 401)
    ```bash
    curl -H "Authorization: Bearer invalid-token" \
      http://localhost:8080/api/v1/products
    ```
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Docker Compose Services
 
@@ -644,36 +644,36 @@ The application uses a multi-stage build:
 
 - `mysql_data`: Persistent MySQL data storage
 
-## 📊 Milestones Completed
+## Milestones Completed
 
-### ✅ Milestone 0: Project Setup
+### Milestone 0: Project Setup
 - Spring Boot 3.3.4 project structure
 - Maven configuration
 - Basic REST controller
 - Health check endpoint
 
-### ✅ Milestone 1: API Foundation
+### Milestone 1: API Foundation
 - Global exception handling
 - Swagger/OpenAPI integration
 - RESTful API conventions
 - Response standardization
 
-### ✅ Milestone 2: Product Management
+### Milestone 2: Product Management
 - Product entity and repository
 - Product CRUD operations
-- Advanced search and filtering
+- Search and filtering
 - Pagination and sorting
 - Redis caching integration
 - Flyway database migrations
 
-### ✅ Milestone 3: Docker & Profiles
+### Milestone 3: Docker & Profiles
 - Docker containerization
 - Docker Compose orchestration
 - Environment profiles (local, docker)
 - Service health checks
 - Volume persistence
 
-### ✅ Milestone 4: Authentication & Authorization
+### Milestone 4: Authentication & Authorization
 - JWT-based authentication
 - User and Role entities
 - BCrypt password hashing
@@ -682,21 +682,21 @@ The application uses a multi-stage build:
 - Swagger JWT integration
 - User registration and login
 
-### ✅ Milestone 5: Caching & Performance
+### Milestone 5: Caching & Performance
 - Redis-based caching with `@Cacheable` annotations
 - Product search and get-by-ID caching
 - Automatic cache invalidation on writes
 - ETag support for conditional GET requests (304 Not Modified)
 - Cache statistics endpoint (`/api/v1/cache/stats`)
 - Cache hit/miss logging for monitoring
-- Optimized Redis serialization (Jackson JSON)
+- Redis serialization (Jackson JSON)
 - 10-minute TTL for cached entries
 - Transaction-aware cache manager
 - Null-safe cache key generation
 - JWT filter optimization for public endpoints (Swagger UI, health checks)
 
-### ✅ Milestone 6: Testing & Production Readiness (FAANG-Level)
-- Comprehensive unit tests (80%+ coverage target)
+### Milestone 6: Testing & Production Readiness
+- Unit tests (80%+ coverage target)
 - Integration tests with Testcontainers
 - E2E tests with full application context
 - CI/CD pipeline (GitHub Actions)
@@ -707,17 +707,17 @@ The application uses a multi-stage build:
 - Security headers
 - API versioning support
 
-## 🔮 Future Milestones
+## Future Milestones
 
 - **Milestone 7**: Advanced Features (Message Queues, Event-Driven Architecture)
 - **Milestone 8**: Scalability (Load Balancing, Horizontal Scaling)
 - **Milestone 9**: Advanced Monitoring (Grafana Dashboards, Alerting)
 
-## 📝 Notes
+## Notes
 
 ### JWT Secret
 
-⚠️ **Important**: Change the JWT secret in production! The default secret in `application.yml` is for development only.
+**Important**: Change the JWT secret in production. The default secret in `application.yml` is for development only.
 
 For production:
 1. Generate a secure random 64+ character string
@@ -732,7 +732,7 @@ For production:
 
 ### Token Expiration
 
-Default JWT token expiration: **3600 seconds (1 hour)**
+Default JWT token expiration: 3600 seconds (1 hour)
 
 Configure in `application.yml`:
 ```yaml
@@ -744,11 +744,11 @@ app:
 ### Caching Strategy
 
 #### Cache Configuration
-- **TTL**: 10 minutes for all cached entries
-- **Cache Names**: 
+- TTL: 10 minutes for all cached entries
+- Cache Names: 
   - `products` - Product search results (keyed by query params)
   - `productById` - Individual products (keyed by ID)
-- **Invalidation**: All caches invalidated on any write operation (POST, PUT, DELETE)
+- Invalidation: All caches invalidated on any write operation (POST, PUT, DELETE)
 
 #### ETag Support
 Products support conditional GET requests using ETags:
@@ -757,9 +757,9 @@ Products support conditional GET requests using ETags:
 - Reduces bandwidth and improves performance
 
 #### Cache Performance
-- **Target**: 90%+ cache hit rate for read operations
-- **Monitoring**: Cache statistics available via `/api/v1/cache/stats` (admin only)
-- **Logging**: Cache hits/misses logged at DEBUG level
+- Target: 90%+ cache hit rate for read operations
+- Monitoring: Cache statistics available via `/api/v1/cache/stats` (admin only)
+- Logging: Cache hits/misses logged at DEBUG level
 
 #### Example: Using ETag
 ```bash
@@ -775,7 +775,7 @@ curl -i -H "Authorization: Bearer <token>" \
   http://localhost:8080/api/v1/products/1
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -783,15 +783,15 @@ curl -i -H "Authorization: Bearer <token>" \
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+## License
 
 [Add your license here]
 
-## 👤 Author
+## Author
 
 **Rishabh**
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Spring Boot team
 - Spring Security team
@@ -803,4 +803,3 @@ curl -i -H "Authorization: Bearer <token>" \
 **Last Updated**: November 2025  
 **Version**: 0.1.0-SNAPSHOT  
 **Status**: Active Development
-
